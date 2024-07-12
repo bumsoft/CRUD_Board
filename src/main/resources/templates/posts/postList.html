@@ -41,9 +41,9 @@
             margin-bottom: 10px;
         }
         .post-header .title {
-              font-weight: bold;
-              font-size: 20px;
-          }
+            font-weight: bold;
+            font-size: 20px;
+        }
         .post-writer {
             font-weight: bold;
             font-size: 10px;
@@ -52,31 +52,34 @@
             font-size: 16px;
             line-height: 1.5;
         }
-        .post-writer, .post-content{
+        .post-writer, .post-content {
             margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
             display: flex;
+            justify-content: flex-end;
             align-items: center;
         }
         label {
             display: block;
             margin-right: 10px;
             font-weight: bold;
-            width: 50px;
         }
         input[type="text"], textarea {
-            flex: 1;
             padding: 10px;
             border: 1px solid #ced4da;
             border-radius: 4px;
             box-sizing: border-box;
             margin-right: 10px;
         }
+        input[type="text"] {
+            width: 200px;
+        }
         textarea {
             resize: vertical;
             height: 150px;
+            width: 100%;
         }
         button {
             background-color: #007bff;
@@ -97,8 +100,8 @@
     <h1>게시글 목록</h1>
     <form action="/posts/search" method="post">
         <div class="form-group">
-            <label for="Keyword">검색</label>
-            <input type="text" id="Keyword" name="Keyword" placeholder="검색하려는 제목을 입력하세요">
+            <label for="Keyword"></label>
+            <input type="text" id="Keyword" name="Keyword" placeholder="게시글 제목을 입력하세요">
             <button type="submit">검색</button>
         </div>
     </form>
@@ -106,13 +109,10 @@
     <div th:each="post : ${posts}" class="post-card">
         <div class="post-header">
             <!-- <div class="title" th:text="${post.title}"></div> -->
-
             <a th:href="@{/posts/{id}(id=${post.id})}" class="title" th:text="${post.title}"></a>
-
-
         </div>
         <div class="post-writer" th:text="'작성자: '+ ${post.writer}"></div>
-       <!-- <div class="post-content" th:text="${post.content}"></div> -->
+        <!-- <div class="post-content" th:text="${post.content}"></div> -->
     </div>
 </div>
 </body>
