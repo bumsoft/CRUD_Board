@@ -15,5 +15,5 @@ public interface PostRepostory {
 
     Long delete(Long id);
 
-    Long update(Long id,String newContents);
+    Long update(Long id,String newTitle, String newContents);
 }

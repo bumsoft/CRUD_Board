@@ -50,7 +50,11 @@ public class PostService {
     //작성자로 조회 : 나중에 만들기
 
     //수정
-
+    public Long updatePost(Long id,String newTitle, String newContent)
+    {
+        postRepostory.update(id,newTitle, newContent);
+        return id;
+    }
 
     //삭제
     public Long deletePost(Long id)

@@ -4,6 +4,7 @@ import com.example.CRUD_Board.domain.Post;
 import com.example.CRUD_Board.dto.PasswordForm;
 import com.example.CRUD_Board.dto.PostForm;
 import com.example.CRUD_Board.dto.SearchForm;
+import com.example.CRUD_Board.dto.UpdateForm;
 import com.example.CRUD_Board.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,6 +92,7 @@ public class PostController {
     {
         List<Post> posts = postService.searchPosts(form.getKeyword());
         model.addAttribute("posts", posts);
+
         return "posts/postList";
     }
 
@@ -101,9 +103,24 @@ public class PostController {
         {
             postService.deletePost(id);
         }
-       // List<Post> posts = postService.findPosts();
-       // model.addAttribute("posts",posts);
         return "redirect:/posts";
     }
 
+
+    @GetMapping("/post/update/{id}")
+    public String updatePost(@PathVariable("id")Long id, Model model)
+    {
+        Post post = postService.onePost(id);
+        model.addAttribute("post",post);
+        return "posts/updatePostForm";
+    }
+    @PostMapping("/post/update/{id}")
+    public String updatePost2(@PathVariable("id")Long id, UpdateForm form)
+    {
+        if (postService.checkPassword(id, form.getPassword()))
+        {
+            postService.updatePost(id, form.getTitle(), form.getContent());
+        }
+        return "redirect:/posts";
+    }
 }

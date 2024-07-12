@@ -33,6 +33,7 @@ public class SpringConfig {
     @Bean
     public PostRepostory postRepostory()
     {
-        return new MemoryPostRepository();
+       return new MemoryPostRepository();
+        //return new MysqlPostRepository();
     }
 }

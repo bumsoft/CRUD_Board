@@ -52,8 +52,9 @@ public class MemoryPostRepository implements PostRepostory {
     }
 
     @Override
-    public Long update(Long id, String newContents)
+    public Long update(Long id, String newTitle, String newContents)
     {
+        store.get(id).setTitle(newTitle);
         store.get(id).setContent(newContents);
         return id;
     }
