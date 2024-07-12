@@ -1,10 +1,10 @@
-package com.example.re_hello_spring;
+package com.example.CRUD_Board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ReHelloSpringApplicationTests {
+class CRUD_BoardSpringApplicationTests {
 
 	@Test
 	void contextLoads() {

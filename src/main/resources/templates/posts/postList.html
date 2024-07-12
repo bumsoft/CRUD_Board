@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>피드</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #343a40;
+            color: #fff;
+            margin: -20px -20px 20px -20px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .post-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .post-header .title {
+              font-weight: bold;
+              font-size: 20px;
+          }
+        .post-writer {
+            font-weight: bold;
+            font-size: 10px;
+        }
+        .post-content {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .post-writer, .post-content{
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        label {
+            display: block;
+            margin-right: 10px;
+            font-weight: bold;
+            width: 50px;
+        }
+        input[type="text"], textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-right: 10px;
+        }
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>게시글 목록</h1>
+    <form action="/posts/search" method="post">
+        <div class="form-group">
+            <label for="Keyword">검색</label>
+            <input type="text" id="Keyword" name="Keyword" placeholder="검색하려는 제목을 입력하세요">
+            <button type="submit">검색</button>
+        </div>
+    </form>
+
+    <div th:each="post : ${posts}" class="post-card">
+        <div class="post-header">
+            <!-- <div class="title" th:text="${post.title}"></div> -->
+
+            <a th:href="@{/posts/{id}(id=${post.id})}" class="title" th:text="${post.title}"></a>
+
+
+        </div>
+        <div class="post-writer" th:text="'작성자: '+ ${post.writer}"></div>
+       <!-- <div class="post-content" th:text="${post.content}"></div> -->
+    </div>
+</div>
+</body>
+</html>
