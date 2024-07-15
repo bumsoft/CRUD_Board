@@ -1,6 +1,6 @@
 package com.example.CRUD_Board.controller;
 
-import com.example.CRUD_Board.domain.Post;
+import com.example.CRUD_Board.domain.entity.Post;
 import com.example.CRUD_Board.dto.PasswordForm;
 import com.example.CRUD_Board.dto.PostForm;
 import com.example.CRUD_Board.dto.SearchForm;
@@ -19,8 +19,6 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
-
-    private boolean t = false;
 
     @Autowired
     public PostController(PostService postService)
@@ -50,30 +48,6 @@ public class PostController {
     @GetMapping("/posts")
     public String list(Model model)
     {
-        if(!t)
-        {
-            t=true;
-            Post p1 = new Post();
-            p1.setTitle("제목1");
-            p1.setWriter("진범1");
-            p1.setContent("내용1");
-            p1.setPassword("1");
-            Post p2 = new Post();
-            p2.setTitle("제목2");
-            p2.setWriter("진범2");
-            p2.setContent("내용2");
-            p2.setPassword("2");
-            Post p3 = new Post();
-            p3.setTitle("제목3");
-            p3.setWriter("진범3");
-            p3.setContent("내용3");
-            p3.setPassword("3");
-            postService.upload(p1);
-            postService.upload(p2);
-            postService.upload(p3);
-        }
-
-
         List<Post> posts = postService.findPosts();
         model.addAttribute("posts", posts);
         return "posts/postList";
@@ -82,7 +56,7 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String getPostById(@PathVariable("id") Long id, Model model)
     {
-        Post post = postService.onePost(id);
+        Post post = postService.onePost(id).get();
         model.addAttribute("post", post);
         return "posts/post";
     }
@@ -110,7 +84,7 @@ public class PostController {
     @GetMapping("/post/update/{id}")
     public String updatePost(@PathVariable("id")Long id, Model model)
     {
-        Post post = postService.onePost(id);
+        Post post = postService.onePost(id).get();
         model.addAttribute("post",post);
         return "posts/updatePostForm";
     }

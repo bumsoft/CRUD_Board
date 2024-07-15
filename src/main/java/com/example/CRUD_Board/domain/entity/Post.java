@@ -1,10 +1,20 @@
-package com.example.CRUD_Board.domain;
+package com.example.CRUD_Board.domain.entity;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Post {
 
+    @Id
+    //dbms가 자동으로 id생성
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Writer;
 
+    private String Writer;
     private String Password;
     private String Title;
     private String Content;

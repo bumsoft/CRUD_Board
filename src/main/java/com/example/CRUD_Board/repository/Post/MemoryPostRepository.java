@@ -1,11 +1,11 @@
 package com.example.CRUD_Board.repository.Post;
 
-import com.example.CRUD_Board.domain.Post;
+import com.example.CRUD_Board.domain.entity.Post;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MemoryPostRepository implements PostRepostory {
+public class MemoryPostRepository implements PostRepository {
 
     private static Map<Long, Post> store = new HashMap<>();
     private static Long sequence = 0L;
@@ -20,35 +20,27 @@ public class MemoryPostRepository implements PostRepostory {
     }
 
     @Override
-    public Optional<Post> findByWriter(String Writer)
-    {
-        return store.values().stream().filter(post ->post.getWriter().equals(Writer))
-                .findAny();
-    }
-
-    @Override
     public List<Post> findAll()
     {
         return new ArrayList<>(store.values());
     }
 
     @Override
-    public Post findById(Long id)
+    public Optional<Post> findById(Long id)
     {
-        return store.get(id);
+        return Optional.ofNullable(store.get(id));
     }
 
     @Override
-    public List<Post> findByTitle(String keyword)
+    public List<Post> findByTitleContaining(String keyword)
     {
         return new ArrayList<>(store.values().stream().filter(post -> post.getTitle().contains(keyword)).collect(Collectors.toList()));
     }
 
     @Override
-    public Long delete(Long id)
+    public void deleteById(Long id)
     {
         store.remove(id);
-        return id;
     }
 
     @Override

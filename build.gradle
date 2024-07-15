@@ -9,8 +9,9 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(22)
 	}
+
 }
 
 repositories {
@@ -25,7 +26,9 @@ dependencies {
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	//jdbc는 위에 -jpa가 포함함.
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'mysql:mysql-connector-java:8.0.29'
 }
 
