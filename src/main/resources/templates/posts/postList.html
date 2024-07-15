@@ -93,11 +93,25 @@
         button:hover {
             background-color: #0056b3;
         }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>게시글 목록</h1>
+    <a href="/" class="btn">홈</a>
     <form action="/posts/search" method="post">
         <div class="form-group">
             <label for="Keyword"></label>
