@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set executable permissions for Gradle Wrapper
+        run: chmod +x ./gradlew
+
       - name: Install Code Climate CLI
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -22,4 +25,4 @@ jobs:
           ./gradlew check
           ./cc-test-reporter after-build --exit-code $?
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CCC }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
