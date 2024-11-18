@@ -8,24 +8,18 @@ on:
 jobs:
   code-quality:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Install Gradle
-        uses: gradle/gradle-build-action@v2
+      - name: Install Code Climate CLI
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
 
       - name: Run Code Climate Analysis
         run: |
-          docker pull codeclimate/codeclimate
-          docker run --rm \
-            -v "$(pwd)":/code \
-            -e CODECLIMATE_CODE="$(pwd)" \
-            codeclimate/codeclimate analyze
+          ./cc-test-reporter before-build
+          ./gradlew check
+          ./cc-test-reporter after-build --exit-code $?
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
