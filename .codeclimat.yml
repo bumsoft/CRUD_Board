@@ -1,0 +1,21 @@
+version: "2"
+checks:
+  argument-count:
+    enabled: true
+  file-lines:
+    enabled: true
+
+plugins:
+  checkstyle:
+    enabled: true
+    config:
+      file: config/checkstyle/checkstyle.xml
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+
+ratings:
+  paths:
+    - "**.java"
+    - "**.gradle"

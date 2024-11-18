@@ -1,0 +1,31 @@
+name: Code Climate Review
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run Code Climate Analysis
+        run: |
+          docker pull codeclimate/codeclimate
+          docker run --rm \
+            -v "$(pwd)":/code \
+            -e CODECLIMATE_CODE="$(pwd)" \
+            codeclimate/codeclimate analyze
