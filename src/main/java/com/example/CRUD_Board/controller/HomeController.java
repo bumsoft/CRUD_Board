@@ -10,5 +10,9 @@ public class HomeController {
     public String home()
     {
         return "home";
+    } 
+
+    public void hi()
+    { return;
     }
 }
